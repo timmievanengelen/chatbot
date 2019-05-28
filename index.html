@@ -12,47 +12,88 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
 
 <body>
-  <div class="autopart-bot-contain">
-    <div id="my-botui-app">
-        <bot-ui>
-            <script>
-                var botui = new BotUI('my-botui-app');
+    <div class="autopart-bot-contain">
+        <div id="my-botui-app">
+            <bot-ui>
+                <script>
+                    var botui = new BotUI('my-botui-app');
 
-                botui.message.add({
-                    content: 'Hoi, wat wil je doen?'
-                });
+                    botui.message.add({
+                        content: 'Hoi, wat wil je doen?'
+                    });
 
-                botui.action.button({
-                    action: [
-                        {
-                            text: 'Iemand spreken',
-                            value: 'iemand_spreken'
-                        },
-                        {
-                            text: 'Probleem vaststellen',
-                            value: 'pv'
-                        },
-                        {
-                            text: 'Bestel status bekijken',
-                            value: 'Bestel_status_bekijken'
+                    botui.action.button({
+                        action: [
+                            {
+                                text: 'Iemand spreken',
+                                value: 'is'
+                            },
+                            {
+                                text: 'Probleem vaststellen',
+                                value: 'pv'
+                            },
+                            {
+                                text: 'Bestel status bekijken',
+                                value: 'bsb'
+                            }
+                        ]
+                    }).then(function (res) {
+                        if (res.value == 'pv') {
+                            kenteken();
                         }
-                    ]
-                })
-                .then(function (res) { // will be called when a button is clicked.
-                    if (res.value == 'pv') {
-                      botui.action.text({
-                        action: {
-                          placeholder: 'Wat is het kenteken van je auto?'
-                        },
-                        delay: 500
-                      })
-                    }
-                });
+                    });
 
-            </script>
-        </bot-ui>
+                    var kenteken = function () {
+                        botui.message.add({
+                            content: 'Om te beginnen',
+                            delay: 500
+                        })
+                        botui.message.add({
+                            content: 'Wat is het kenteken van je auto?',
+                            delay: 1000
+                        })
+                        botui.action.text({
+                            action: {
+                                placeholder: 'QQ-RT-21',
+                            },
+                            delay: 1000
+                        }).then(function (res) {
+                            return botui.message.bot({
+                                delay: 500,
+                                content: res.value + ', even zoeken...'
+                            });
+                        }).then(function () {
+                            botui.message.add({
+                                content: 'Klopt het dat dit jouw auto is?',
+                                delay: 1000
+                            })
+                            botui.message.add({
+                                content: 'Mazda demio <br> Gekke motor, 4l <br> kt:',
+                                delay: 1000
+                            })
+                        }).then(function () {
+                            botui.action.button({
+                                action: [
+                                    {
+                                        text: 'Ja',
+                                        value: 'ja'
+                                    },
+                                    {
+                                        text: 'Nee',
+                                        value: 'nee'
+                                    }
+                                ]
+                            }).then(function (res) {
+                                if (res.value == 'nee') {
+                                    kenteken();
+                                }
+                            })
+                        }
+                    };
+                </script>
+            </bot-ui>
+        </div>
     </div>
-  </div>
 
 
 </body>
