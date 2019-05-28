@@ -7,6 +7,8 @@
     <script src="https://unpkg.com/botui/build/botui-theme-default.css"></script>
     <script src="https://cdn.jsdelivr.net/vue/latest/vue.min.js"></script>
     <script src="https://unpkg.com/botui/build/botui.min.js"></script>
+    <script src="assets/js/autopartsmart.js"></script>
+    <script src="assets/js/autobot.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui-theme-default.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -39,11 +41,43 @@
                         ]
                     }).then(function (res) {
                         if (res.value == 'pv') {
-                            kenteken();
+                            autoBot.askForCar();
                         }
                     });
 
-                    var kenteken = function () {
+                    var autoBot = {
+                        askForCar: function (res) {
+                            botui.action.text({
+                                action: {
+                                    placeholder: 'Wat is het kenteken van je auto?'
+                                },
+                                delay: 500
+                            })
+
+                                .then(function (res) {
+                                    let finalKenteken = res.value.toUpperCase().replace(/-/g, '');
+                                    var currentAuto = new auto(finalKenteken);
+                                })
+
+                                .then(function () {
+                                    botui.message.add({
+                                        content: 'Klopt het dat dit jouw auto is?',
+                                        delay: 1000
+                                    })
+                                        .then(function () {
+                                            console.log(carObj);
+                                            botui.message.add({
+                                                content: carObj.handelsbenaming,
+                                                delay: 500
+                                            })
+                                        });
+                                })
+                        }
+                    }
+
+
+
+                    /*var kenteken = function () {
                         botui.message.add({
                             content: 'Om te beginnen',
                             delay: 500
@@ -58,11 +92,8 @@
                             },
                             delay: 1000
                         })
-                            .then(function (res) {
-                                let finalKenteken = res.value.toUpperCase().replace(/-/g, '');
-                                var currentAuto = new auto(finalKenteken);
-                            })
-
+                
+                        
 
 
                             .then(function (res) {
@@ -101,6 +132,7 @@
                                 })
                             });
                     }
+                    */
 
                     var menu = function () {
                         botui.message.add({
@@ -136,12 +168,7 @@
                         });
                     }
 
-                    var followup = function (onderwerp) {
-                        botui.message.add({
-                            content: onderwerp + ' is dus het probleem',
-                            delay: 500
-                        })
-                    }
+
 
                 </script>
             </bot-ui>
