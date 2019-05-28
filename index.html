@@ -68,10 +68,9 @@
                                 delay: 1000
                             })
                             botui.message.add({
-                                content: 'Mazda demio <br> Gekke motor, 4l <br> kt:',
+                                content: 'Mazda demio, moter y',
                                 delay: 1000
                             })
-                        }).then(function () {
                             botui.action.button({
                                 action: [
                                     {
@@ -82,14 +81,60 @@
                                         text: 'Nee',
                                         value: 'nee'
                                     }
-                                ]
+                                ],
+                                delay: 1500
                             }).then(function (res) {
+                                if (res.value == 'ja') {
+                                    menu();
+                                }
                                 if (res.value == 'nee') {
                                     kenteken();
                                 }
                             })
-                        }
-                    };
+                        });
+                    }
+
+                    var menu = function () {
+                        botui.message.add({
+                            content: 'Nu we weten welke auto je hebt',
+                            delay: 500
+                        })
+                        botui.message.add({
+                            content: 'Met welk onderwerp denk je dat er iets mis mee is?',
+                            delay: 500
+                        })
+                        botui.action.select({
+                            action: {
+                                placeholder: "Onderwerpen", 
+                                multipleselect: false, 
+                                options: [
+                                    { value: "ac", text: "Airco/koeling" },
+                                    { value: "rs", text: "Remsysteem" },
+                                    { value: "mv", text: "Motor/versnellingsbak" },
+                                    { value: "cs", text: "Carroserie" },
+                                    { value: "os", text: "Onderstel" },
+                                    { value: "el", text: "Elektronica" },
+                                    { value: "iw", text: "Ik weet het niet" },
+                                ],
+                                button: {
+                                    icon: 'check',
+                                    label: 'Ok'
+                                }
+                            },
+                                delay: 1000
+                        }).then(function (res) { 
+                            console.log(res.value);
+                            followup(res.text);
+                        });
+                    }
+
+                    var followup = function (onderwerp) {
+                        botui.message.add({
+                            content: 'Het ' + onderwerp + ' dus',
+                            delay: 500
+                        })
+                    }
+
                 </script>
             </bot-ui>
         </div>
