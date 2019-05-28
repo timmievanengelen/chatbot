@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/botui/build/botui.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui-theme-default.css" />
-    <link rel="stylesheet" href="assets/css/styles.css" /> 
+    <link rel="stylesheet" href="assets/css/styles.css" />
 
 <body>
   <div class="autopart-bot-contain">
@@ -30,15 +30,23 @@
                         },
                         {
                             text: 'Probleem vaststellen',
-                            value: 'probleem_vaststellen'
+                            value: 'pv'
                         },
                         {
                             text: 'Bestel status bekijken',
                             value: 'Bestel_status_bekijken'
                         }
                     ]
-                }).then(function (res) { // will be called when a button is clicked.
-                    console.log(res.value); // will print "one" from 'value'
+                })
+                .then(function (res) { // will be called when a button is clicked.
+                    if (res.value == 'pv') {
+                      botui.action.text({
+                        action: {
+                          placeholder: 'Wat is het kenteken van je auto?'
+                        },
+                        delay: 500
+                      })
+                    }
                 });
 
             </script>
