@@ -17,23 +17,28 @@
                 var botui = new BotUI('my-botui-app');
 
                 botui.message.add({
-                    content: 'Hello from bot.'
+                    content: 'Hoi, wat wil je doen?'
                 });
 
-                botui.message.add({ // show a message
-                    human: true,
-                    content: 'Whats your name?'
-                }).then(function () { // wait till its shown
-                    return botui.action.text({ // show 'text' action
-                        action: {
-                            placeholder: 'Your name'
+                botui.action.button({
+                    action: [
+                        {
+                            text: 'Iemand spreken',
+                            value: 'iemand_spreken'
+                        },
+                        {
+                            text: 'Probleem vaststellen',
+                            value: 'probleem_vaststellen'
+                        },
+                        {
+                            text: 'Bestel status bekijken',
+                            value: 'Bestel_status_bekijken'
                         }
-                    });
-                }).then(function (res) { // get the result
-                    botui.message.add({
-                        content: 'Your name is ' + res.value
-                    });
+                    ]
+                }).then(function (res) { // will be called when a button is clicked.
+                    console.log(res.value); // will print "one" from 'value'
                 });
+
             </script>
         </bot-ui>
     </div>
