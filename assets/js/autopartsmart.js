@@ -6,7 +6,11 @@ var auto = function(kenteken) {
       return response.json();
     })
     .then(function(myJson) {
-      // console.log(myJson[0]);
-      autoBot.showCarDetails(myJson[0]);
+      if (myJson[0]) {
+        autoBot.showCarDetails(myJson[0]);
+      }
+      else {
+        autoBot.noCar();
+      }
     });
 }
