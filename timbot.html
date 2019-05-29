@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/botui/build/botui.min.js"></script>
     <script src="assets/js/autopartsmart.js"></script>
     <script src="assets/js/autobot.js"></script>
+    <script src="assets/js/koeling.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui-theme-default.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -160,19 +161,21 @@
                                             value: 'iwh'
                                         }
                                     ], delay: 1000
+                                }).then(function (res) {
+                                    if (res.value == 'iwh') {
+                                        autoBot.contact();
+                                    }
+                                    if (res.value == 'ac') {
+                                        koelingBot.koeling();
+                                    }
+                                    else {
+                                        console.log(res.value);
+                                        autoBot.followup(res.text);
+                                    }
                                 })
-                                    .then(function (res) {
-                                        if (res.value == 'iwh') {
-                                            autoBot.contact();
-                                        }
-                                        else {
-                                            console.log(res.value);
-                                            autoBot.followup(res.text);
-                                        }
-                                    })
                             )
                         },
-                        
+
                         contact: function (res) {
                             botui.message.add({
                                 content: 'Neem alstublieft contact op met ons!',
@@ -188,7 +191,7 @@
                         }
 
                     }
-                                
+
                 </script>
             </bot-ui>
         </div>
