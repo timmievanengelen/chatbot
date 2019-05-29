@@ -1,8 +1,0 @@
-var koelingBot = {
-    koeling: function() {
-        botui.message.add({
-            content: 'Het probleem heeft dus te maken met de koeling',
-            delay: 500
-        });
-    }
-}

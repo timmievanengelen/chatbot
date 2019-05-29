@@ -9,7 +9,7 @@
     <script src="https://unpkg.com/botui/build/botui.min.js"></script>
     <script src="assets/js/autopartsmart.js"></script>
     <script src="assets/js/autobot.js"></script>
-    <script src="assets/js/koeling.js"></script>
+    <script src="assets/js/elektronica.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui-theme-default.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
@@ -165,8 +165,8 @@
                                     if (res.value == 'iwh') {
                                         autoBot.contact();
                                     }
-                                    if (res.value == 'ac') {
-                                        koelingBot.koeling();
+                                    if (res.value == 'el') {
+                                        elektronicaBot.elektronica();
                                     }
                                     else {
                                         console.log(res.value);
@@ -189,9 +189,7 @@
                                 delay: 500
                             });
                         }
-
                     }
-
                 </script>
             </bot-ui>
         </div>
