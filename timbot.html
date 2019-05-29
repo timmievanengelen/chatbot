@@ -47,17 +47,39 @@
 
                     var autoBot = {
                         askForCar: function (res) {
-                            botui.action.text({
-                                action: {
-                                    placeholder: 'Wat is het kenteken van je auto?'
-                                },
+                            botui.message.add({
+                                content: 'Om te beginnen',
                                 delay: 500
                             })
+                            botui.message.add({
+                                content: 'Wat is het kenteken van je auto?',
+                                delay: 500
+                            })
+                            botui.action.text({
+                                action: {
+                                    placeholder: 'XBXB54'
+                                },
+                                delay: 1000
+                            }).then(function (res) {
+                                let finalKenteken = res.value.toUpperCase().replace(/-/g, '');
+                                var currentAuto = new auto(finalKenteken);
+                            })
+                        },
 
-                                .then(function (res) {
-                                    let finalKenteken = res.value.toUpperCase().replace(/-/g, '');
-                                    var currentAuto = new auto(finalKenteken);
-                                })
+                        noCar: function () {
+                            botui.message.add({
+                                content: 'Kenteken niet gevonden, probeer het opnieuw',
+                                delay: 500
+                            })
+                            botui.action.text({
+                                action: {
+                                    placeholder: 'XBXB54'
+                                },
+                                delay: 1000
+                            }).then(function (res) {
+                                let finalKenteken = res.value.toUpperCase().replace(/-/g, '');
+                                var currentAuto = new auto(finalKenteken);
+                            })
                         },
 
                         showCarDetails: function (carObj) {
@@ -71,6 +93,8 @@
                                         content: carObj.handelsbenaming,
                                         delay: 500
                                     })
+                                }).then(function () {
+                                    autoBot.showCar(carObj);
                                 });
                         },
 
@@ -85,107 +109,86 @@
                                         text: 'Nee',
                                         value: 'nee'
                                     }
-                                ]
+                                ], delay: 1000
+                            }).then(function (res) {
+                                if (res.value == 'ja') {
+                                    autoBot.showMenu();
+                                }
+                                if (res.value == 'nee') {
+                                    autoBot.askForCar();
+                                }
                             })
-                        }
-                    }
-                    
+                        },
 
-
-
-                    /*var kenteken = function () {
-                        botui.message.add({
-                            content: 'Om te beginnen',
-                            delay: 500
-                        })
-                        botui.message.add({
-                            content: 'Wat is het kenteken van je auto?',
-                            delay: 1000
-                        })
-                        botui.action.text({
-                            action: {
-                                placeholder: 'QQ-RT-21',
+                        showMenu: function (res) {
+                            botui.message.add({
+                                content: 'Nu we weten welke auto je hebt',
+                                delay: 500
+                            })
+                            botui.message.add({
+                                content: 'Met welk onderwerp denk je dat er iets mis mee is?',
+                                delay: 500
                             },
-                            delay: 1000
-                        })
-                
-                        
-
-
-                            .then(function (res) {
-                                return botui.message.bot({
-                                    delay: 500,
-                                    content: res.value + ', even zoeken...'
-                                });
-                            }).then(function () {
-                                botui.message.add({
-                                    content: 'Klopt het dat dit jouw auto is?',
-                                    delay: 1000
-                                })
-                                botui.message.add({
-                                    content: 'Mazda demio, moter y',
-                                    delay: 1000
-                                })
                                 botui.action.button({
                                     action: [
                                         {
-                                            text: 'Ja',
-                                            value: 'ja'
+                                            text: 'Airco/koeling',
+                                            value: 'ac'
                                         },
                                         {
-                                            text: 'Nee',
-                                            value: 'nee'
+                                            text: 'Remsysteem',
+                                            value: 'rs'
+                                        },
+                                        {
+                                            text: 'Motor/versnellingsbak',
+                                            value: 'mv'
+                                        },
+                                        {
+                                            text: 'Carresorie',
+                                            value: 'cs'
+                                        },
+                                        {
+                                            text: 'Onderstel',
+                                            value: 'os'
+                                        },
+                                        {
+                                            text: 'Elektronica',
+                                            value: 'el'
+                                        },
+                                        {
+                                            text: 'Ik weet het niet',
+                                            value: 'iwh'
                                         }
-                                    ],
-                                    delay: 1500
-                                }).then(function (res) {
-                                    if (res.value == 'ja') {
-                                        menu();
-                                    }
-                                    if (res.value == 'nee') {
-                                        kenteken();
-                                    }
+                                    ], delay: 1000
                                 })
+                                    .then(function (res) {
+                                        if (res.value == 'iwh') {
+                                            autoBot.contact();
+                                        }
+                                        else {
+                                            console.log(res.value);
+                                            autoBot.followup(res.text);
+                                        }
+                                    })
+                            )
+                        },
+                        
+                        contact: function (res) {
+                            botui.message.add({
+                                content: 'Neem alstublieft contact op met ons!',
+                                delay: 500
+                            })
+                        },
+
+                        followup: function (res) {
+                            botui.message.add({
+                                content: 'Het probleem heeft dus te maken met het onderwerp: ' + res,
+                                delay: 500
                             });
+                        }
+
                     }
-                    */
-
-                    var menu = function () {
-                        botui.message.add({
-                            content: 'Nu we weten welke auto je hebt',
-                            delay: 500
-                        })
-                        botui.message.add({
-                            content: 'Met welk onderwerp denk je dat er iets mis mee is?',
-                            delay: 500
-                        })
-                        botui.action.select({
-                            action: {
-                                placeholder: "Onderwerpen",
-                                multipleselect: false,
-                                options: [
-                                    { value: "ac", text: "Airco/koeling" },
-                                    { value: "rs", text: "Remsysteem" },
-                                    { value: "mv", text: "Motor/versnellingsbak" },
-                                    { value: "cs", text: "Carroserie" },
-                                    { value: "os", text: "Onderstel" },
-                                    { value: "el", text: "Elektronica" },
-                                    { value: "iw", text: "Ik weet het niet" },
-                                ],
-                                button: {
-                                    icon: 'check',
-                                    label: 'Ok'
-                                }
-                            },
-                            delay: 1000
-                        }).then(function (res) {
-                            console.log(res.value);
-                            followup(res.text);
-                        });
-                    }
-
-
-
+                                
                 </script>
             </bot-ui>
         </div>
