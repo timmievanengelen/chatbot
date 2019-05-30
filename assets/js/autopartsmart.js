@@ -14,3 +14,9 @@ var auto = function(kenteken) {
       }
     });
 }
+
+var autoWalkthrough = {
+  hinderDriving: function() {
+    
+  }
+}

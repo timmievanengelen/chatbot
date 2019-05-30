@@ -75,26 +75,24 @@ var autoBot = {
   },
 
   askOptions: function() {
-    botui.action.select({
-      action: {
-          placeholder: "Onderwerpen",
-          multipleselect: false,
-          options: [
-              { value: "ac", text: "Airco/koeling" },
-              { value: "rs", text: "Remsysteem" },
-              { value: "mv", text: "Motor/versnellingsbak" },
-              { value: "cs", text: "Carroserie" },
-              { value: "os", text: "Onderstel" },
-              { value: "el", text: "Elektronica" },
-              { value: "iw", text: "Ik weet het niet" },
-          ],
-          button: {
-              icon: 'check',
-              label: 'Ok'
-          }
-      },
-          delay: 500
+    botui.message.add({
+      content: 'Hindert het probleem het rijden?',
+      delay: 500
     })
+    .then(function(){
+      botui.action.button({
+          action: [
+              {
+                  text: 'Ja',
+                  value: 'ja'
+              },
+              {
+                  text: 'Nee',
+                  value: 'nee'
+              }
+          ], delay: 500
+      })
+    });
   },
 
   error: function() {
