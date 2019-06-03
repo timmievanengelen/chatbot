@@ -5,11 +5,14 @@ var lp = [
       let arrayStr = str.trim().split(" ");
       let category = lp[0].findKeyWord(arrayStr);
       if (category == null) {
-        return chatError();
+        chatError();
       }
       else {
-        chat.setChatStage(1);
-        return 'Je hebt dus problemen met: ' + category.category;
+        let finalString = 'Je hebt dus problemen met: ' + category.category;
+        lp[chat.chatStage].renderChat(finalString);
+        chat.setChatCategoryObj(category);
+        chat.setChatCategory(category.category);
+        lp[1].setChat();
       }
     },
 
@@ -36,6 +39,18 @@ var lp = [
         }
       }
     },
+
+    renderChat: function(chatString) {
+      botui.message.add({
+        content: chatString,
+        delay: 500
+      });
+      botui.message.add({
+        content: 'Wil je specifieker zijn?',
+        delay: 750
+      });
+      chat.setChatStage(1);
+    }
   },
 
 
@@ -43,11 +58,28 @@ var lp = [
 
   // STAGE 1 OF CHAT
   {
+    setChat: function() {
+      let category = chat.chatCategoryObj;
+      let subcategories = category.subcategories;
+      let categoriesBtns = [];
+      for (let i=0; i<subcategories.length; i++) {
+        categoriesBtns[i] = {
+          text: subcategories[i].category
+        }
+      }
+      categoriesBtns[subcategories.length] = { text: 'Ik weet het niet' };
+
+      botui.action.button({
+        action: categoriesBtns,
+        delay: 750
+      })
+    },
+
     processLang: function() {
       alert('stage 1');
     }
   }
-]
+];
 
 
 chatError = function() {
@@ -56,5 +88,10 @@ chatError = function() {
     'Sorry, ik snap niet wat je bedoelt.',
     'Ik snap het niet.'
   ]
-  return allErrors[Math.floor(Math.random()*allErrors.length)];
+  let errorString = allErrors[Math.floor(Math.random()*allErrors.length)];
+  botui.message.add({
+    content: errorString,
+    delay: 500
+  });
+  setTimeout(autoBot.userAskQuestion, 750);
 }

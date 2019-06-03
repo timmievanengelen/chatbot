@@ -3,7 +3,18 @@ var autopartCategories = [
     category: 'Airco',
     synonyms: ['Koeling'],
     chatStage: 0,
-    subcategories: []
+    subcategories: [
+      {
+        category: 'Airco diversen',
+        synonyms: [],
+        chatStage: 1
+      },
+      {
+        category: 'Airco elektronica',
+        synonyms: [],
+        chatStage: 1
+      }
+    ]
   },
   {
     category: 'Remsysteem',

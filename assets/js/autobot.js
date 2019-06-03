@@ -79,12 +79,15 @@ var autoBot = {
       action: {
         placeholder: 'Typ je bericht.'
       }
-    }).then(function (res) { // will be called when it is submitted.
-      botui.message.add({
-        content: lp[chat.chatStage].processLang(res.value),
-        delay: 500
-      });
-      setTimeout(autoBot.userAskQuestion, 750);
+    })
+    .then(function (res) { // will be called when it is submitted.
+      lp[chat.chatStage].processLang(res.value);
+
+      // botui.message.add({
+      //   content: lp[chat.chatStage].processLang(res.value),
+      //   delay: 500
+      // });
+      // setTimeout(autoBot.userAskQuestion, 750);
     });
   },
 
