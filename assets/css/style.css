@@ -1,0 +1,38 @@
+a {
+    color: white;
+}
+
+.header {
+    border-bottom: 2px solid #f5821f;
+    background-color: white;
+    width: 500px;
+    position: fixed;
+    top: 0;
+    overflow: hidden;
+}
+
+.botui-messages-container {
+    margin-top: 70px;
+}
+
+.logo {
+    padding: 10px;
+    width: 40%;
+}
+
+.botui-container {
+    margin-top: 70px;
+}
+
+.botui-message-content {
+    background-color: #f5821f;
+    color: white;
+}
+
+.botui-message-content.human {
+    background-color: #00a1e4;
+}
+
+.botui-actions-buttons-button {
+    background-color: #00a1e4;
+}

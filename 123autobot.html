@@ -9,13 +9,19 @@
     <script src="https://unpkg.com/botui/build/botui.min.js"></script>
     <script src="assets/js/autopartsmart.js"></script>
     <script src="assets/js/autobot.js"></script>
-    <script src="assets/js/elektronica.js"></script>
+    <script src="assets/js/divers.js"></script>
+    <script src="assets/js/ruitenwissers.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui-theme-default.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
 <body>
+
     <div class="autopart-bot-contain">
+        <div class="header">
+            <img class="logo" src="assets/img/logo.png">
+        </div>
         <div id="my-botui-app">
             <bot-ui>
                 <script>
@@ -69,7 +75,7 @@
 
                         noCar: function () {
                             botui.message.add({
-                                content: 'Kenteken niet gevonden, probeer het opnieuw',
+                                content: 'We kunnen je kenteken niet vinden, probeer het opnieuw',
                                 delay: 500
                             })
                             botui.action.text({
@@ -157,6 +163,10 @@
                                             value: 'el'
                                         },
                                         {
+                                            text: 'Diversen',
+                                            value: 'div'
+                                        },
+                                        {
                                             text: 'Ik weet het niet',
                                             value: 'iwh'
                                         }
@@ -165,8 +175,8 @@
                                     if (res.value == 'iwh') {
                                         autoBot.contact();
                                     }
-                                    if (res.value == 'el') {
-                                        elektronicaBot.elektronica();
+                                    if (res.value == 'div') {
+                                        diversenBot.diversen();
                                     }
                                     else {
                                         console.log(res.value);
