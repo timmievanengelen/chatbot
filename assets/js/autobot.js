@@ -65,7 +65,7 @@ var autoBot = {
       }
 
       else if (res.value == 'ja') {
-        autoBot.askOptions();
+        autoBot.userAskQuestion();
       }
 
       else {
@@ -74,24 +74,17 @@ var autoBot = {
     })
   },
 
-  askOptions: function() {
-    botui.message.add({
-      content: 'Hindert het probleem het rijden?',
-      delay: 500
-    })
-    .then(function(){
-      botui.action.button({
-          action: [
-              {
-                  text: 'Ja',
-                  value: 'ja'
-              },
-              {
-                  text: 'Nee',
-                  value: 'nee'
-              }
-          ], delay: 500
-      })
+  userAskQuestion: function() {
+    botui.action.text({
+      action: {
+        placeholder: 'Typ je bericht.'
+      }
+    }).then(function (res) { // will be called when it is submitted.
+      botui.message.add({
+        content: lp[chat.chatStage].processLang(res.value),
+        delay: 500
+      });
+      setTimeout(autoBot.userAskQuestion, 750);
     });
   },
 

@@ -1,41 +1,60 @@
-var processLang = function(str) {
-  let arrayStr = str.trim().split(" ");
-  let category = findKeyWord(arrayStr);
-  if (category == null) {alert('geen categroie')}
-}
-
-var findKeyWord = function(arrayStr) {
-  let categories = autopartCategories;
-  // console.log(arrayStr);
-  for (let i=0;i<arrayStr.length;i++) {
-    for (let j=0;j<categories.length;j++) {
-      // console.log(categories[j].category);
-      if (compareCategory(arrayStr[i], categories[j])) {
-        return categories[j];
+var lp = [
+  // STAGE 0 OF CHAT
+  {
+    processLang: function(str) {
+      let arrayStr = str.trim().split(" ");
+      let category = lp[0].findKeyWord(arrayStr);
+      if (category == null) {
+        return chatError();
       }
-    }
-  }
-}
+      else {
+        chat.setChatStage(1);
+        return 'Je hebt dus problemen met: ' + category.category;
+      }
+    },
 
-var compareCategory = function(potentialKeyWord, potentialCategoryObj) {
-  console.log(potentialKeyWord + ' ' + potentialCategoryObj.category);
-  if (potentialKeyWord == potentialCategoryObj.category) {
-    return true;
-  }
-  else {
-    for (let i=0;i<potentialCategoryObj['synonyms'].length;i++) {
-      if (potentialKeyWord == potentialCategoryObj['synonyms'][i]) {
+    findKeyWord: function(arrayStr) {
+      let categories = autopartCategories;
+      for (let i=0;i<arrayStr.length;i++) {
+        for (let j=0;j<categories.length;j++) {
+          if (lp[0].compareCategory(arrayStr[i], categories[j])) {
+            return categories[j];
+          }
+        }
+      }
+    },
+
+    compareCategory: function(potentialKeyWord, potentialCategoryObj) {
+      if (potentialKeyWord.toLowerCase() == potentialCategoryObj['category'].toLowerCase()) {
         return true;
       }
+      else {
+        for (let i=0;i<potentialCategoryObj['synonyms'].length;i++) {
+          if (potentialKeyWord.toLowerCase() == potentialCategoryObj['synonyms'][i].toLowerCase()) {
+            return true;
+          }
+        }
+      }
+    },
+  },
+
+
+
+
+  // STAGE 1 OF CHAT
+  {
+    processLang: function() {
+      alert('stage 1');
     }
   }
+]
+
+
+chatError = function() {
+  let allErrors = [
+    'Ik heb niet gevonden wat je zoekt.',
+    'Sorry, ik snap niet wat je bedoelt.',
+    'Ik snap het niet.'
+  ]
+  return allErrors[Math.floor(Math.random()*allErrors.length)];
 }
-
-
-
-
-
-
-
-enne = processLang('rem');
-// "Dan moet je een nieuwe motor kopen..."

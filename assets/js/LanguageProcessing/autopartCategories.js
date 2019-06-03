@@ -1,35 +1,44 @@
 var autopartCategories = [
   {
-    category: 'airco',
-    synonyms: ['koeling', 'en', 'vanalles', 'nogwat']
+    category: 'Airco',
+    synonyms: ['Koeling'],
+    chatStage: 0,
+    subcategories: []
   },
   {
-    category: 'remsysteem',
-    synonyms: ['rem'],
+    category: 'Remsysteem',
+    synonyms: ['Rem'],
+    chatStage: 0,
     subcategories: [
       {
-        category: 'remblokken en schijven',
-        synonyms: ['remblokken', 'remblok', 'remschijven', 'remschijf']
+        category: 'Remblokken en schijven',
+        synonyms: ['Remblokken', 'Remblok', 'Remschijven', 'Remschijf'],
+        chatStage: 1
       },
       {
-        category: 'remhydrauliek',
-        synonyms: []
+        category: 'Remhydrauliek',
+        synonyms: [],
+        chatStage: 1
       },
       {
-        category: 'remklauw',
-        synonyms: []
+        category: 'Remklauw',
+        synonyms: [],
+        chatStage: 1
       },
       {
-        category: 'remmen diversen',
-        synonyms: []
+        category: 'Remmen diversen',
+        synonyms: [],
+        chatStage: 1
       },
       {
-        category: 'slangen en leidingen',
-        synonyms: []
+        category: 'Slangen en leidingen',
+        synonyms: [],
+        chatStage: 1
       },
       {
-        category: 'schoenen en remtrommel',
-        synonyms: ['remschoen', 'remschoenen', 'remtrommel']
+        category: 'Schoenen en remtrommel',
+        synonyms: ['Remschoen', 'Remschoenen', 'Remtrommel'],
+        chatStage: 1
       }
     ]
   }

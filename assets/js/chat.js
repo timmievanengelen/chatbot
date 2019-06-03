@@ -1,10 +1,9 @@
-var chat = {
-  message: function(content, delay) {
-    botui.message.add({
-      content: content,
-      delay: delay
-    })
-  },
+class Chat {
+  constructor() {
+    this.chatStage = 0;
+  }
 
-  
+  setChatStage(chatStage) {
+    this.chatStage = chatStage;
+  }
 }
