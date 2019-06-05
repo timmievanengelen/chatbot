@@ -28,7 +28,7 @@
                     var botui = new BotUI('my-botui-app');
 
                     botui.message.add({
-                        content: 'Hoi, ik ben een de chatbot van 123autoparts',
+                        content: 'Hoi, ik ben een de chatbot van 123autoparts.nl',
                         delay: 500
                     });
 
@@ -51,12 +51,33 @@
                                 text: 'Bestel status bekijken',
                                 value: 'bsb'
                             }
-                        ],delay: 1500
+                        ], delay: 1500
                     }).then(function (res) {
                         if (res.value == 'pv') {
                             autoBot.askForCar();
                         }
+                        if (res.value == 'is') {
+                            nonAutoBot.askForPerson();
+                        }
+                        if (res.value == 'bsb') {
+                            nonAutoBot.askForStatus();
+                        }
                     });
+
+                    var nonAutoBot = {
+                        askForPerson: function (res) {
+                            botui.message.add({
+                                content: 'Neem<a href="https://www.123autoparts.nl/contact"> contact met ons op!</a><br>of bel: 030 200 31 91<br>of mail ons: info@123autoparts.nl',
+                                delay: 500
+                            })
+                        },
+                        askForStatus: function (res) {
+                            botui.message.add({
+                                content: 'Klik<a href="https://www.123autoparts.nl/login"> hier om in te loggen!</a>',
+                                delay: 500
+                            })
+                        }
+                    }
 
                     var autoBot = {
                         askForCar: function (res) {
