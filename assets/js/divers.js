@@ -6,7 +6,7 @@ var diversenBot = {
         }),
         botui.message.add({
             content: 'Kan je wat specifieker aangeven waar het probleem mee te maken heeft?',
-            delay: 500
+            delay: 1000
         }),
         botui.action.button({
             action: [

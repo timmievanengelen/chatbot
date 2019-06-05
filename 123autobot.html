@@ -28,7 +28,13 @@
                     var botui = new BotUI('my-botui-app');
 
                     botui.message.add({
-                        content: 'Hoi, wat wil je doen?'
+                        content: 'Hoi, ik ben een de chatbot van 123autoparts',
+                        delay: 500
+                    });
+
+                    botui.message.add({
+                        content: 'Wat wil je doen?',
+                        delay: 1000
                     });
 
                     botui.action.button({
@@ -45,7 +51,7 @@
                                 text: 'Bestel status bekijken',
                                 value: 'bsb'
                             }
-                        ]
+                        ],delay: 1500
                     }).then(function (res) {
                         if (res.value == 'pv') {
                             autoBot.askForCar();
