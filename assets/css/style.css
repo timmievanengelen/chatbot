@@ -2,6 +2,17 @@ a {
     color: white;
 }
 
+.help {
+    background-color: #00a1e4;
+    margin-top: 15px;
+    color: white;
+    float: right;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: "Open Sans";
+    font-size: 15px;
+}
+
 .header {
     border-bottom: 2px solid #f5821f;
     background-color: white;

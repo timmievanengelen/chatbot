@@ -132,7 +132,7 @@ var wisserBot = {
             delay: 1000
         }),
         botui.message.add({
-            content: '<a href="https://www.123autoparts.nl/auto-accessoires/elektronica/universele-ruitensproeierpomp">Bekijk hem hier</a>',
+            content: '<a target="_blank" href="https://www.123autoparts.nl/auto-accessoires/elektronica/universele-ruitensproeierpomp">Bekijk hem hier</a>',
             delay: 1500
         })
     }

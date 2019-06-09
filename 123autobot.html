@@ -17,10 +17,10 @@
     <link rel="stylesheet" href="assets/css/style.css" />
 
 <body>
-
     <div class="autopart-bot-contain">
         <div class="header">
             <img class="logo" src="assets/img/logo.png">
+            <a href="https://www.123autoparts.nl/contact" class="help">Ik kom er niet uit, help!</a>
         </div>
         <div id="my-botui-app">
             <bot-ui>
@@ -206,7 +206,6 @@
                                         diversenBot.diversen();
                                     }
                                     else {
-                                        console.log(res.value);
                                         autoBot.followup(res.text);
                                     }
                                 })
@@ -215,7 +214,7 @@
 
                         contact: function (res) {
                             botui.message.add({
-                                content: 'Neem alstublieft contact op met ons!',
+                                content: 'Neem<a href="https://www.123autoparts.nl/contact"> contact met ons op!</a><br>of bel: 030 200 31 91<br>of mail ons: info@123autoparts.nl',
                                 delay: 500
                             })
                         },

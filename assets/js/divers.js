@@ -38,10 +38,17 @@ var diversenBot = {
                     text: 'Trekhaak en transportsystemen',
                     value: 'trekhaak'
                 },
+                {
+                    text: 'Ik weet het niet',
+                    value: 'iwh'
+                },
             ],delay: 1000
         }).then(function (res) {
             if (res.value == 'ruiten') {
                 wisserBot.ruitenKeuze();
+            }
+            if (res.value == 'iwh') {
+                autoBot.contact();
             }
         });
     },
