@@ -3,6 +3,7 @@ class Chat {
     this.chatStage = 0;
     this.chatCategory = '';
     this.chatCategoryObj = {};
+    this.chatSubCategoryObj = {};
   }
 
   setChatStage(chatStage) {
@@ -15,5 +16,9 @@ class Chat {
 
   setChatCategoryObj(chatCategoryObj) {
     this.chatCategoryObj = chatCategoryObj;
+  }
+
+  setSubCategoryObj(chatSubCategoryObj) {
+    this.chatSubCategoryObj = chatSubCategoryObj;
   }
 }

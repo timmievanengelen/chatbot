@@ -9,10 +9,7 @@ a {
     position: fixed;
     top: 0;
     overflow: hidden;
-}
-
-.botui-messages-container {
-    margin-top: 70px;
+    z-index: 10;
 }
 
 .logo {
@@ -21,7 +18,8 @@ a {
 }
 
 .botui-container {
-    margin-top: 70px;
+    top: 70px;
+    position: relative;
 }
 
 .botui-message-content {

@@ -34,7 +34,16 @@ var autopartCategories = [
       {
         category: 'Remklauw',
         synonyms: [],
-        chatStage: 1
+        chatStage: 1,
+        products: [
+          {
+            chatStage: 2,
+            articleNumber: 721402,
+            name: 'A.B.S Remklauw',
+            articleImg: 'https://www.123autoparts.nl/pegasus-3-0/documents/353/845520167425419/1',
+            articleLink: 'https://www.123autoparts.nl/onderdelen/72/mazda/3883/demio-dw/9999/1-3-16v/remsysteem/remklauw/artikel/206/a-b-s/721402'
+          }
+        ]
       },
       {
         category: 'Remmen diversen',

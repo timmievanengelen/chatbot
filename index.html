@@ -16,9 +16,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/botui/build/botui-theme-default.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
     <link rel="stylesheet" href="assets/css/botstyles.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
 
 <body>
     <div class="autopart-bot-contain">
+      <div class="header">
+          <img class="logo" src="assets/img/logo.png">
+      </div>
         <div id="my-botui-app">
             <bot-ui>
                 <script>
@@ -26,7 +30,12 @@
                     var chat = new Chat();
 
                     botui.message.add({
-                        content: 'Hoi, wat wil je doen?'
+                        content: 'Hoi, ik ben de chatbot van 123autoparts.',
+                        delay: 250
+                    })
+                    botui.message.add({
+                      content: 'Wat wil je doen?',
+                      delay: 300
                     });
 
                     botui.action.button({
@@ -47,7 +56,8 @@
                                 text: 'Skip naar chat',
                                 value: 's2c'
                             }
-                        ]
+                        ],
+                        delay: 400
                     })
                 .then(function (res) { // will be called when a button is clicked.
                     if (res.value == 'pv') {

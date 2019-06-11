@@ -46,7 +46,7 @@ var lp = [
         delay: 500
       });
       botui.message.add({
-        content: 'Wil je specifieker zijn?',
+        content: 'En waar zit het dan precies?',
         delay: 750
       });
       chat.setChatStage(1);
@@ -67,16 +67,46 @@ var lp = [
           text: subcategories[i].category
         }
       }
-      categoriesBtns[subcategories.length] = { text: 'Ik weet het niet' };
+      categoriesBtns[subcategories.length] = { text: 'Ik weet het niet', value: 'iwhn' };
 
       botui.action.button({
         action: categoriesBtns,
         delay: 750
       })
+      .then(function(res) {
+        lp[chat.chatStage].processBtn(res);
+      });
     },
 
-    processLang: function() {
-      alert('stage 1');
+    processBtn: function(btnRes) {
+      let subCategoryObj;
+      let selectedSubCategory = btnRes.text;
+      let subCategories = chat.chatCategoryObj.subcategories;
+      for (let i=0;i<subCategories.length;i++) {
+        if (selectedSubCategory == subCategories[i].category) {
+          subCategoryObj = subCategories[i];
+          break;
+        }
+      }
+      chat.setSubCategoryObj(subCategoryObj);
+      chat.setChatStage(2);
+      lp[chat.chatStage].setChat();
+    }
+  },
+
+  // STAGE 2 OF CHAT
+  {
+    setChat: function() {
+      let subCategory = chat.chatSubCategoryObj;
+      console.log(subCategory);
+      let products = subCategory.products;
+      botui.message.add({content: 'ik heb ' + products.length + ' product(en) gevonden:', delay: 500 });
+      for (let i=0;i<products.length;i++) {
+        botui.message.add({
+          content: products[i].name,
+          delay: 500*i
+        });
+      }
     }
   }
 ];
