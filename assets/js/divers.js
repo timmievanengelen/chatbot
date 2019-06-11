@@ -6,7 +6,7 @@ var diversenBot = {
         }),
         botui.message.add({
             content: 'Kan je wat specifieker aangeven waar het probleem mee te maken heeft?',
-            delay: 500
+            delay: 1000
         }),
         botui.action.button({
             action: [
@@ -38,10 +38,17 @@ var diversenBot = {
                     text: 'Trekhaak en transportsystemen',
                     value: 'trekhaak'
                 },
+                {
+                    text: 'Ik weet het niet',
+                    value: 'iwh'
+                },
             ],delay: 1000
         }).then(function (res) {
             if (res.value == 'ruiten') {
                 wisserBot.ruitenKeuze();
+            }
+            if (res.value == 'iwh') {
+                autoBot.contact();
             }
         });
     },
